@@ -1,6 +1,7 @@
 package fraglabs.jaxbworkshop.model;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,11 @@ public class Company {
         this.name = name;
     }
 
+    @XmlElementWrapper(name = "persons")
+    @XmlElement(name = "name")
+    @XmlJavaTypeAdapter(value = PersonAdapter.class)
     public List<Person> getPersons() {
+        System.out.println("Getter invoked");
         if (persons == null) {
             persons = new ArrayList<Person>();
         }
@@ -37,29 +42,11 @@ public class Company {
         return persons;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
-    @XmlElementWrapper(name = "persons")
-    @XmlElement(name = "name")
-    public List<String> getPersonNames() {
-        System.out.println("Getter invoked");
-        List<String> personNames = new ArrayList<String>();
-        for (Person person : getPersons()) {
-            personNames.add(person.getName());
-        }
-
-        return personNames;
-    }
-
-    /* Instead of the setter, just the getter would be sufficient if there was a var to cache the added persons */
-    public void setPersonNames(List<String> personNames) {
-        System.out.println("Setter invoked");
-        for (String personName : personNames) {
-            getPersons().add(new Person(personName));
-        }
-    }
+    /* If setter is available, it will be used. If not jaxb will add on the list retrieved by the getter */
+//    public void setPersons(List<Person> persons) {
+//        System.out.println("Setter invoked");
+//        this.persons = persons;
+//    }
 
     @Override
     public String toString() {
