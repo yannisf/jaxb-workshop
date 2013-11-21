@@ -31,8 +31,8 @@ public class Company {
     }
 
     @XmlElementWrapper(name = "persons")
-    @XmlElement(name = "name")
-    @XmlJavaTypeAdapter(value = PersonAdapter.class)
+    @XmlElement(name = "person")
+    @XmlJavaTypeAdapter(value = PersonAdapter1.class)
     public List<Person> getPersons() {
         System.out.println("Getter invoked");
         if (persons == null) {
@@ -42,11 +42,6 @@ public class Company {
         return persons;
     }
 
-    /* If setter is available, it will be used. If not jaxb will add on the list retrieved by the getter */
-//    public void setPersons(List<Person> persons) {
-//        System.out.println("Setter invoked");
-//        this.persons = persons;
-//    }
 
     @Override
     public String toString() {

@@ -2,6 +2,7 @@ package fraglabs.jaxbworkshop;
 
 import fraglabs.jaxbworkshop.model.Company;
 import fraglabs.jaxbworkshop.model.Person;
+import fraglabs.jaxbworkshop.model.PersonAdapter2;
 import org.junit.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -22,8 +23,8 @@ public class MarshalTests {
     @BeforeTest
     public void setup() {
         List<Person> persons = new ArrayList<Person>();
-        persons.add(new Person("Alice"));
-        persons.add(new Person("Bob"));
+        persons.add(new Person("Miss Alice Wonderland"));
+        persons.add(new Person("Mr Bob Marley"));
         company = new Company("Security R US", persons);
     }
 
@@ -32,6 +33,16 @@ public class MarshalTests {
         JAXBContext context = JAXBContext.newInstance(Company.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(company, System.out);
+    }
+
+    @Test
+    public void extended() throws JAXBException {
+        JAXBContext context = JAXBContext.newInstance(Company.class);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        //This fails! Adapters does not kick-in
+        marshaller.setAdapter(new PersonAdapter2());
         marshaller.marshal(company, System.out);
     }
 
