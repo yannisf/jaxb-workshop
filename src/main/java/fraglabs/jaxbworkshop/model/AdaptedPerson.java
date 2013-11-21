@@ -1,15 +1,13 @@
 package fraglabs.jaxbworkshop.model;
 
-public class AdaptedPerson2 {
+public class AdaptedPerson {
 
-    private String title;
     private String firstName;
     private String lastName;
 
-    public AdaptedPerson2() { }
+    public AdaptedPerson() { }
 
-    public AdaptedPerson2(String title, String firstName, String lastName) {
-        this.title = title;
+    public AdaptedPerson(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -30,19 +28,10 @@ public class AdaptedPerson2 {
         this.lastName = lastName;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @Override
     public String toString() {
-        return "AdaptedPerson2{" +
-                "title='" + title + '\'' +
-                ", firstName='" + firstName + '\'' +
+        return "AdaptedPerson{" +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }

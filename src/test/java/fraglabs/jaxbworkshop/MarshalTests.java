@@ -2,17 +2,13 @@ package fraglabs.jaxbworkshop;
 
 import fraglabs.jaxbworkshop.model.Company;
 import fraglabs.jaxbworkshop.model.Person;
-import fraglabs.jaxbworkshop.model.PersonAdapter2;
-import org.junit.BeforeClass;
+import fraglabs.jaxbworkshop.model.PersonAdapter;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +19,8 @@ public class MarshalTests {
     @BeforeTest
     public void setup() {
         List<Person> persons = new ArrayList<Person>();
-        persons.add(new Person("Miss Alice Wonderland"));
-        persons.add(new Person("Mr Bob Marley"));
+        persons.add(new Person("Alice Wonderland"));
+        persons.add(new Person("Bob Marley"));
         company = new Company("Security R US", persons);
     }
 
@@ -37,13 +33,13 @@ public class MarshalTests {
     }
 
     @Test
-    public void extended() throws JAXBException {
+    public void override() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Company.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        //This fails! Adapters does not kick-in
-        marshaller.setAdapter(new PersonAdapter2());
+        marshaller.setAdapter(new PersonAdapter(" *SET* "));
         marshaller.marshal(company, System.out);
     }
+
 
 }

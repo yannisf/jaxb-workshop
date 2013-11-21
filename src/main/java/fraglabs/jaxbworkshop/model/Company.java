@@ -32,7 +32,7 @@ public class Company {
 
     @XmlElementWrapper(name = "persons")
     @XmlElement(name = "person")
-    @XmlJavaTypeAdapter(value = PersonAdapter1.class)
+    @XmlJavaTypeAdapter(value = PersonAdapter.class)
     public List<Person> getPersons() {
         System.out.println("Getter invoked");
         if (persons == null) {
