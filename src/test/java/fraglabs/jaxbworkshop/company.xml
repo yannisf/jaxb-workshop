@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<company>
+    <name>Security R US</name>
+    <persons>
+        <person>
+            <firstName>Alice</firstName>
+            <lastName>Wonderland</lastName>
+        </person>
+        <person>
+            <firstName>Bob</firstName>
+            <lastName>Marley</lastName>
+        </person>
+    </persons>
+</company>
